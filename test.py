@@ -33,6 +33,14 @@ def francemap(df):
     france.boundary.plot(ax=ax, linewidth=1, color="black")
     merged_data.plot(column="conso", cmap="YlGnBu", linewidth=0.8, ax=ax, legend=True)
     st.pyplot(fig, "france.png")
+    
+def simpleplot(df):
+    df2021 = df[df['annee'] == 2021]
+    grouped_data = df2021.groupby('code_region')['conso'].sum().reset_index()
+    fig, ax = plt.subplots(1, 1, figsize=(10, 10))
+    ax.set_title("In 2021")
+    plt.plot(grouped_data['code_region'], grouped_data['conso'])
+    st.pyplot(fig, "simpleplot.png")
                 
 
 def main():
@@ -51,6 +59,7 @@ def main():
         if check:
             francemap(df)
         stbarchar(df)
+        simpleplot(df)
     elif option == 'year':
         st.write('Here is the consumption by year')
         st.bar_chart(df['annee'].value_counts())
