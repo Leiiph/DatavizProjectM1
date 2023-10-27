@@ -11,6 +11,7 @@ import plotly.express as px
 ####### FUNCTIONS #########
 
 ##### Loading data
+@st.cache_data
 def load_clear_data(file):
     '''Load the data into a dataframe and clear it from useless columns and rows'''
     df = pd.read_csv(file, delimiter=";", encoding='utf-8')
